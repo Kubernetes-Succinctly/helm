@@ -3,17 +3,14 @@ kind: Service
 metadata:
   name: {{ include "remind-me-web.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "remind-me-web.name" . }}
+    name: {{ include "remind-me-web.name" . }}
     helm.sh/chart: {{ include "remind-me-web.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.targetPort }}
       protocol: TCP
-      name: http
+      nodePort: {{ .Values.service.nodePort }}
   selector:
-    app.kubernetes.io/name: {{ include "remind-me-web.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    name: {{ include "remind-me-web.name" . }}
