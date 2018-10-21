@@ -6,7 +6,7 @@ metadata:
     name: {{ include "remind-me-web.name" . }}
     helm.sh/chart: {{ include "remind-me-web.chart" . }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCount }} # substitute value of replica count from the value in Values.yaml file
   selector:
     matchLabels:
       name: {{ include "remind-me-web.name" . }}
@@ -16,7 +16,7 @@ spec:
         name: {{ include "remind-me-web.name" . }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }} # the substitution value of this parameter is present in Chart.yaml file
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - name: http
