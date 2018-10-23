@@ -14,3 +14,5 @@ spec:
       nodePort: {{ .Values.service.nodePort }}
   selector:
     name: {{ include "remind-me-web.name" . }}
+# problem: can't figure out what this will evaluate to?
+# {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
